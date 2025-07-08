@@ -89,9 +89,9 @@ What Sakkhi offers:
 
 ### ✅ Checkpoint 4 – [08-07-2025 6:04 PM]
 
-- Completed the full *Landing Page* UI
+- Completed the full Landing Page UI
 - Designed all remaining pages (Dashboard, Check-in, Peer Room, etc.)
-- Started implementing *authentication flow*
+- Started implementing authentication flow
 - Frontend structure now fully ready for functional integration
 - Updated README
 
