@@ -1,12 +1,15 @@
 import React from 'react'
+import SpeakPage from './Components/SpeakPage'
+import SpeakUp from './Components/SpeakUp'
+import ReflexionPage from './Components/ReflexionPage'
 
 const SunoKhudKo = () => {
   return (
-    <div>
-       <div style={{ marginTop: '80px', color: 'black' }}>
-      Suno khudko
-    </div>
-    </div>
+  <>
+  <SpeakPage/>
+  <SpeakUp/>
+  <ReflexionPage/>
+  </>
   )
 }
 

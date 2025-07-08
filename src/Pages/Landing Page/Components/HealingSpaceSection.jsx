@@ -17,7 +17,7 @@ const features = [
   },
   {
     icon: '👭',
-    title: 'Sisterhood Circles',
+    title: 'Circle Of One',
     subtitle: 'Anonymous support chatrooms',
     description: 'Connect with other mothers who understand your journey, without judgment.',
   },
@@ -29,7 +29,7 @@ const features = [
   },
   {
     icon: '📖',
-    title: 'Library of Loss & Light',
+    title: 'Bharosa Library',
     subtitle: 'Real mom stories (English/Hindi)',
     description: 'Read stories from mothers who’ve walked this path and found their way back to themselves.',
   },
