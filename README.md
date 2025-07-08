@@ -95,7 +95,14 @@ What Sakkhi offers:
 - Frontend structure now fully ready for functional integration
 - Updated README
 
+---
 
+### ✅ Checkpoint 5 – [08-07-2025 8:18 PM]
+
+- Completed all three main pages
+- Started working on backend logic (routes & controllers)
+- Prepared frontend to start connecting with backend functions
+- Updated README
 
 ---
 
