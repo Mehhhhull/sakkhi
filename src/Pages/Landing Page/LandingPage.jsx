@@ -1,12 +1,13 @@
 import React from 'react'
+import HeroSection from './Components/HeroSection'
+import Quotes from './Components/Quotes'
 
 const LandingPage = () => {
   return (
-    <div>
-       <div style={{ marginTop: '80px', color: 'black' }}>
-      Landing
-    </div>
-    </div>
+  <>
+  <HeroSection/>
+  <Quotes/>
+  </>
   )
 }
 
