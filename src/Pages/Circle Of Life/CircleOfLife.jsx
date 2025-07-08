@@ -4,7 +4,7 @@ const CircleOfLife = () => {
   return (
     <div>
        <div style={{ marginTop: '80px', color: 'black' }}>
-      Circle of life
+      Circle of one
     </div>
     </div>
   )
