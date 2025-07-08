@@ -63,6 +63,7 @@ What Sakkhi offers:
 - Set up GitHub repo and README  
 - Assigned team roles and initial tech stack
 - Finalized reference design for project
+- Uploaded PPT of Problem Statement & Proposed Solution
 
 ---
 
