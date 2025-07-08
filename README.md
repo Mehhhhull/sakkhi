@@ -77,9 +77,13 @@ What Sakkhi offers:
 
 ---
 
-### ✅ Checkpoint 3 – []
+### ✅ Checkpoint 3 – [08-07-2025 4:09 PM]
 
-
+- Started building the Home Page UI, designed other pages UI but will be enhancing it more in future
+- Set up React Router with working paths for all core pages
+- Now fully able to navigate between views (Landing, Dashboard, etc.)
+- Frontend structure now stable for feature integration
+- Updated README
 
 ---
 
