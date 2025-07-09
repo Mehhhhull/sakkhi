@@ -216,6 +216,16 @@ Sakkhi is thoughtfully built using the principles of **Human-Centered Design (HC
 
 ---
 
+### ✅ Checkpoint Last – [09-07-2025 11:26 PM]
+- Final touches to all major sections of the website  
+- Ensured full responsiveness across devices  
+- Fixed all pending bugs and UI glitches  
+- Completed integration of all core features  
+- Cleaned up the codebase and removed unused files  
+- Added screenshots, updated README, and verified deployment
+
+---
+
 # 🌸 Sakkhi — Website
 
 This is the website of **Sakkhi**, a wellness platform focused on postpartum healing.  
