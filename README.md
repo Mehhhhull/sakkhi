@@ -195,6 +195,58 @@ Sakkhi is thoughtfully built using the principles of **Human-Centered Design (HC
 
 ---
 
+# 🌸 Sakkhi — Frontend Overview
+
+This is the frontend of **Sakkhi**, a wellness platform focused on postpartum healing.  
+Built with a clean tech stack, responsive design, and meaningful UI to serve users with softness and purpose.
+
+---
+
+## 🛠️ Tech Stack
+
+| Tool / Library         | Purpose                            |
+|------------------------|------------------------------------|
+| **React 19**           | UI development                     |
+| **Vite**               | Lightning-fast build tool          |
+| **Tailwind CSS 4**     | Utility-first CSS framework        |
+| **React Router v7**    | Routing between pages              |
+| **Framer Motion**      | Page and element animations        |
+| **Lucide React**       | Lightweight modern icon library    |
+| **React Icons**        | Extended icon pack for components  |
+| **Recharts**           | Graphs and data visualization      |
+| **Date-fns**           | Date utilities                     |
+| **ESLint**             | Linting and code quality checks    |
+
+---
+
+## ✨ Features Implemented in Frontend
+
+- ✅ Fully responsive layout for mobile, tablet, and desktop  
+- ✅ Functional routing between all main pages  
+- ✅ Smooth page transitions using Framer Motion  
+- ✅ Emotion timeline graphs using Recharts  
+- ✅ Tailwind-powered, scalable component styling  
+- ✅ Icons and visuals integrated using Lucide and React Icons  
+- ✅ Micro-interactions for cleaner UX  
+- ✅ Organized folder structure for scalability
+
+---
+
+## 📚 References & Acknowledgements
+
+This project was built with deep respect for open-source tools and emotional wellness design.
+
+- [Heroicons](https://heroicons.com) for icons  
+- [Tailwind CSS](https://tailwindcss.com) for utility-first styling  
+- [Lucide Icons](https://lucide.dev) and [React Icons](https://react-icons.github.io/react-icons)  
+- [Recharts](https://recharts.org/) for data visualization  
+- Google Fonts and system fonts for clean typography  
+- Inspiration drawn from wellness, journaling, and community-based platforms
+
+🧡 All visual and code adaptations are original, with no direct reuse of copyrighted material
+
+---
+
 # 🌸 Sakkhi — Local Setup Guide
 
 This is the official repository for **Sakkhi**, a self-love and emotional wellness platform for postpartum mothers.  
