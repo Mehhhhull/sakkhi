@@ -14,7 +14,7 @@ const HeartIcon = () => (
 
 const Hero = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#2a0845] to-[#6441a5] flex items-center justify-center px-4">
+    <div className="min-h-screen  pt-20 bg-gradient-to-b from-[#2a0845] to-[#6441a5] flex items-center justify-center px-4">
       <div className="text-center max-w-xl">
         {/* Title of the page is here*/}
         <h1 className="text-white text-4xl md:text-5xl font-serif font-semibold mb-4">
