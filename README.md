@@ -1,4 +1,4 @@
-# 🌸 Sakkhi — Your Companion for Postpartum Healing
+# 🌸 Sakkhi — Your Companion for Postpartum Healing (Team : CodeZen)
 
 > “We ask about the baby. But who asks the mother how she’s doing?”
 
@@ -264,6 +264,9 @@ sakkhi/
 
 ## 🚀 How to Run the Project Locally
 
+- Frontend: http://localhost:5173  
+- Backend: http://localhost:5000 (or default backend port)
+
 ### 1️⃣ Clone the Repository
 
 - git clone https://github.com/Mehhhhull/sakkhi.git
@@ -284,7 +287,7 @@ sakkhi/
 ---
 
 # 💬 Need Help?
-Contact the developers:
+Contact the developers Team : CodeZen 
 
 - Mehul Kumar Singh – mehulkumarsingh6@gmail.com
 - Tanush Gupta – tanushgupta006work@gmail.com
