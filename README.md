@@ -125,6 +125,16 @@ What Sakkhi offers:
 
 ---
 
+### ✅ Checkpoint 2 – [09-07-2025 4:18 PM]
+
+- Made core features functional
+- Connected UI elements with functional logic
+- Improved interaction between components (basic working structure done)
+- Prepared pages for upcoming integrations
+- Updated README
+
+---
+
 # 🌸 Sakkhi — Local Setup Guide
 
 This is the official repository for **Sakkhi**, a self-love and emotional wellness platform for postpartum mothers.  
