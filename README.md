@@ -115,6 +115,16 @@ What Sakkhi offers:
 
 ---
 
+### ✅ Checkpoint 1 – [09-07-2025 2:17 PM]
+
+- No commits made at this time
+- Implemented feedback received from mentor session
+- Made changes locally based on suggestions
+- Tested minor improvements, but did not push any files to GitHub
+- Updated README
+
+---
+
 # 🌸 Sakkhi — Local Setup Guide
 
 This is the official repository for **Sakkhi**, a self-love and emotional wellness platform for postpartum mothers.  
