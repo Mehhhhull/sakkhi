@@ -191,6 +191,7 @@ Sakkhi is thoughtfully built using the principles of **Human-Centered Design (HC
 - Integrated remaining features as planned (Almost)
 - Verified responsiveness across devices
 - Cleaned up codebase and finalized layouts
+- Updated README
 
 ---
 
