@@ -4,7 +4,7 @@ import { Waves, Leaf, HeartPulse } from 'lucide-react';
 const HealingFeatures = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-gradient-to-br from-[#a278b5] to-[#f1cfe2] relative">
-      {/* Micro Meditations Section For women to feel better & reusable */}
+      {/* Micro Meditations Section For women to feel better & this sec is reusable */}
       <div className="mt-20 w-full max-w-6xl px-4">
         <h2 className="text-2xl sm:text-3xl font-semibold text-purple-800 text-center">Micro Meditations</h2>
         <p className="text-sm text-purple-400 text-center mt-1 mb-6">Small moments of peace, designed for busy minds</p>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const Lofi = () => {
   const [volumes, setVolumes] = useState({
@@ -6,32 +6,69 @@ const Lofi = () => {
     2: 50,
     3: 50,
   });
-  //  making constants here
+
+  // Sound definitions and icons
+  // Each sound has an id, title, description, icon, and file path
+  // Icons are emojis for simplicity, but can be replaced with images
+  // File paths should point to the actual sound files in your public directory
+  // You can add more sounds by following the same structure
+  // Make sure to add the sound files in the public/sounds directory
+  // Example sound files: rain-lofi.mp3, ocean-flute.mp3, forest-veena.mp3
+
   const sounds = [
     {
       id: 1,
       title: "Rain + Lo-fi",
       description: "Gentle rainfall with soft beats",
       icon: "🌧️",
+      file: "/sounds/rain-lofi.mp3",
     },
     {
       id: 2,
       title: "Ocean + Flute",
       description: "Waves meeting melodic flute",
       icon: "🌊",
+      file: "/sounds/ocean-flute.mp3",
     },
     {
       id: 3,
       title: "Forest + Veena",
       description: "Nature sounds with classical strings",
       icon: "🌿",
+      file: "/sounds/forest-veena.mp3",
     },
   ];
-  // volume handeling can change or remove later
+
+  // Refs to audio elements
+  const audioRefs = useRef({});
+
+  // Load and play sounds
+  useEffect(() => {
+    sounds.forEach((sound) => {
+      const audio = new Audio(sound.file);
+      audio.loop = true;
+      audio.volume = volumes[sound.id] / 100;
+      audio.play();
+      audioRefs.current[sound.id] = audio;
+    });
+
+    return () => {
+      // Stop sounds on unmount 
+      Object.values(audioRefs.current).forEach((audio) => {
+        audio.pause();
+      });
+    };
+  }, []);
+
+  // Volume handler, incr or decr volume based on slider input
   const handleVolumeChange = (id, value) => {
     setVolumes((prev) => ({ ...prev, [id]: value }));
+    const audio = audioRefs.current[id];
+    if (audio) {
+      audio.volume = value / 100;
+    }
   };
-
+// return statement starts here bhai
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-purple-50">
       <h1 className="text-3xl font-semibold text-purple-700 mb-1">Soothing Sound Bar</h1>
