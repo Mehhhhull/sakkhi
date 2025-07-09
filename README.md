@@ -52,6 +52,13 @@ What Sakkhi offers:
 
 ---
 
+## 📱 Responsiveness
+
+The entire platform is fully responsive.  
+Whether you're using a phone, tablet, or desktop, the experience adapts smoothly and maintains usability across all devices.
+
+---
+
 ## 📍 Hackathon Checkpoints
 
 > ✏️ Filling in the updates after every checkpoint
@@ -134,6 +141,17 @@ What Sakkhi offers:
 - Updated README
 
 ---
+
+### ✅ Checkpoint 3 – [09-07-2025 6:38 PM]
+
+- Fixed major and minor UI/UX bugs across pages
+- Added relevant media (images/icons) where required
+- Made 4 main tabs fully functional with proper routing and working logic
+- Improved overall frontend experience and responsiveness
+- Updated README
+
+---
+
 
 # 🌸 Sakkhi — Local Setup Guide
 
