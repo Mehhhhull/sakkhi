@@ -24,7 +24,7 @@ const Navbar = () => {
           to="/my-reflexion"
           className="py-1 px-3 text-lg font-light text-white hover:text-black rounded-2xl hover:bg-pink-200 transition duration-300"
         >
-          My Reflexion
+          My Reflection
         </Link>
         <Link
           to="/soothe-space"

@@ -1,12 +1,15 @@
 import React from 'react'
+import Hero from './Components/Hero'
+import MoodReflect from './Components/MoodReflect'
+import MoodTrack from './Components/MoodTrack'
 
 const MyReflection = () => {
   return (
-    <div>
-       <div style={{ marginTop: '80px', color: 'black' }}>
-      My Reflection
-    </div>
-    </div>
+    <>
+    <Hero/>
+    <MoodReflect/>
+    <MoodTrack/>
+    </>
   )
 }
 
