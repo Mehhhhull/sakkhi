@@ -98,8 +98,8 @@ const groupBy = (data, period) => {
       period === "week"
         ? entry.date.slice(5)
         : period === "month"
-          ? entry.date.slice(0, 7)
-          : entry.date.slice(0, 4);
+        ? entry.date.slice(0, 7)
+        : entry.date.slice(0, 4);
     if (!grouped[key]) grouped[key] = [];
     grouped[key].push(entry);
   });
@@ -140,47 +140,49 @@ const MoodTrack = () => {
   // This is the data that will be used in the graph, you can replace it with your actual data from the backend or can put more fake datas
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#2a0845] to-[#6441a5] flex items-center justify-center px-4 py-12">
-      <div className="bg-gradient-to-b from-[#2a0845] to-[#6441a5] p-6 rounded-xl text-white max-w-4xl mx-auto mt-10 shadow-lg">
-        <h2 className="text-center text-2xl font-semibold mb-6">Your Healing Timeline</h2>
+     <div className="min-h-screen bg-gradient-to-b from-[#2a0845] to-[#6441a5] flex items-center justify-center px-4 py-12">
+    <div className="bg-gradient-to-b from-[#2a0845] to-[#6441a5] p-6 rounded-xl text-white max-w-4xl mx-auto mt-10 shadow-lg">
+      <h2 className="text-center text-2xl font-semibold mb-6">Your Healing Timeline</h2>
 
-        {/* Tabs */}
-        <div className="flex justify-center gap-4 mb-6">
-          {[
-            { label: "This Week", value: "week" },
-            { label: "This Month", value: "month" },
-            { label: "This Year", value: "year" },
-          ].map((tab) => (
-            <button
-              key={tab.value}
-              onClick={() => setView(tab.value)}
-              className={`px-4 py-2 rounded-full transition font-medium text-sm ${view === tab.value
-                  ? "bg-pink-500 text-white"
-                  : "bg-white bg-opacity-20 text-black hover:bg-opacity-30"
-                }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-{/* Charts are here, also made itr responsive do make changes here afterwards bro */}
-
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={data}>
-            <XAxis dataKey="date" stroke="#fff" />
-            <YAxis domain={[0, 5]} ticks={[1, 2, 3, 4, 5]} stroke="#fff" />
-            <Tooltip content={<CustomTooltip />} />
-            <LineChart
-              type="monotone"
-              dataKey="moodScore"
-              stroke="#ff69b4"
-              strokeWidth={3}
-              dot={{ r: 6, stroke: "white", strokeWidth: 2, fill: "#ff69b4" }}
-              activeDot={{ r: 8 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+      {/* Tabs */}
+      <div className="flex justify-center gap-4 mb-6">
+        {[
+          { label: "This Week", value: "week" },
+          { label: "This Month", value: "month" },
+          { label: "This Year", value: "year" },
+        ].map((tab) => (
+          <button
+            key={tab.value}
+            onClick={() => setView(tab.value)}
+            className={`px-4 py-2 rounded-full transition font-medium text-sm ${
+              view === tab.value
+                ? "bg-pink-500 text-white"
+                : "bg-white bg-opacity-20 text-black hover:bg-opacity-30"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
+
+      //Charts are here, also made itr responsive do make changes here afterwards bro
+      
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={data}>
+          <XAxis dataKey="date" stroke="#fff" />
+          <YAxis domain={[0, 5]} ticks={[1, 2, 3, 4, 5]} stroke="#fff" />
+          <Tooltip content={<CustomTooltip />} />
+          <Line
+            type="monotone"
+            dataKey="moodScore"
+            stroke="#ff69b4"
+            strokeWidth={3}
+            dot={{ r: 6, stroke: "white", strokeWidth: 2, fill: "#ff69b4" }}
+            activeDot={{ r: 8 }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
     </div>
   );
 };

@@ -1,12 +1,11 @@
 import React from 'react'
+import Pagefor from './Components/Pagefor'
 
 const CircleOfLife = () => {
   return (
-    <div>
-       <div style={{ marginTop: '80px', color: 'black' }}>
-      Circle of one
-    </div>
-    </div>
+    <>
+    <Pagefor/>
+    </>
   )
 }
 
