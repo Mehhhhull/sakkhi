@@ -115,4 +115,48 @@ What Sakkhi offers:
 
 ---
 
+# 🌸 Sakkhi — Local Setup Guide
+
+This is the official repository for **Sakkhi**, a self-love and emotional wellness platform for postpartum mothers.  
+Follow the steps below to run the project locally.
+
+---
+
+## 📁 Folder Structure
+
+sakkhi/
+├── client/ → React frontend
+├── server/ → Node.js backend
+
+
+---
+
+## 🚀 How to Run the Project Locally
+
+### 1️⃣ Clone the Repository
+
+git clone https://github.com/Mehhhhull/sakkhi.git
+cd sakkhi
+
+### 2️⃣ Run the Frontend
+
+cd client
+npm install
+npm run dev
+
+### 3️⃣ Run the Backend
+
+cd server
+npm install
+npm run dev
+
+---
+
+# 💬 Need Help?
+Contact the developers:
+
+Mehul Kumar Singh – mehulkumarsingh6@gmail.com
+
+Tanush Gupta – tanushgupta006work@gmail.com
+
 
