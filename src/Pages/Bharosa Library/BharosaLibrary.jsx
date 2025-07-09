@@ -1,12 +1,14 @@
 import React from 'react'
+import BlogSection from './Components/BlogSection'
+import Hero from './Components/Hero'
 
 const BharosaLibrary = () => {
   return (
-    <div>
-       <div style={{ marginTop: '80px', color: 'black' }}>
-      Bharosa Library
-    </div>
-    </div>
+   <>
+   <Hero/>
+   <BlogSection/>
+
+   </>
   )
 }
 
