@@ -11,6 +11,22 @@ You can explore the deployed version of **Sakkhi** here:
 
 ---
 
+## 🖼️ UI Preview – Screenshots
+
+Visual highlights of the Sakkhi platform:
+
+### 📍 Landing Page
+![Landing Page](https://github.com/Mehhhhull/sakkhi/blob/0bbb9ddb29dd026fd79e5a813d2ad5cac83b38d0/Screenshot%202025-07-09%20230642.png?raw=true)
+
+---
+
+### 📱 Fully Responsive Design
+![Responsive Layout](https://github.com/Mehhhhull/sakkhi/blob/0bbb9ddb29dd026fd79e5a813d2ad5cac83b38d0/Screenshot%202025-07-09%20230900.png?raw=true)
+
+> The platform is fully responsive and adapts beautifully across mobile, tablet, and desktop screens.
+
+---
+
 ## 🧠 Problem Statement
 
 - 75%+ Indian mothers feel overwhelmed postpartum.  
