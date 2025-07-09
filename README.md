@@ -4,6 +4,11 @@
 
 Sakkhi is **India’s first mother-first emotional wellness platform**, helping postpartum moms track healing through mood, voice, rituals, and community — all in a culturally sensitive, zero-judgment space.
 
+## 🌐 Live Demo
+
+You can explore the deployed version of **Sakkhi** here:  
+👉 [https://sakkhi-dun.vercel.app/](https://sakkhi-dun.vercel.app/)
+
 ---
 
 ## 🧠 Problem Statement
