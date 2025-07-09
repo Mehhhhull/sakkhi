@@ -195,9 +195,9 @@ Sakkhi is thoughtfully built using the principles of **Human-Centered Design (HC
 
 ---
 
-# 🌸 Sakkhi — Frontend Overview
+# 🌸 Sakkhi — Website
 
-This is the frontend of **Sakkhi**, a wellness platform focused on postpartum healing.  
+This is the website of **Sakkhi**, a wellness platform focused on postpartum healing.  
 Built with a clean tech stack, responsive design, and meaningful UI to serve users with softness and purpose.
 
 ---
@@ -219,11 +219,11 @@ Built with a clean tech stack, responsive design, and meaningful UI to serve use
 
 ---
 
-## ✨ Features Implemented in Frontend
+## ✨ Features Implemented
 
 - ✅ Fully responsive layout for mobile, tablet, and desktop  
 - ✅ Functional routing between all main pages  
-- ✅ Smooth page transitions using Framer Motion  
+- ✅ Smooth page transitions
 - ✅ Emotion timeline graphs using Recharts  
 - ✅ Tailwind-powered, scalable component styling  
 - ✅ Icons and visuals integrated using Lucide and React Icons  
