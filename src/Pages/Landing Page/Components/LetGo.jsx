@@ -9,11 +9,16 @@ const LetGo = () => {
     setTimeout(() => {
       setText("");
       setIsFading(false);
-    }, 500); // Matches fade-out duration
+    }, 500);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-purple-50 px-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#1F1832] px-4 py-8">
+      {/* Top Heading */}
+      <h2 className="text-4xl font-bold text-white mb-8 text-center">
+        Kuch Bolna Chahti Ho?
+      </h2>
+
       <div className="bg-white/70 backdrop-blur-md border border-purple-200 rounded-xl shadow-lg p-6 max-w-lg w-full transition-all">
         <h1 className="text-3xl font-semibold text-purple-700 text-center">
           Write, Then Let Go

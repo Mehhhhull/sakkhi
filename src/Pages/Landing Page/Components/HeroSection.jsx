@@ -1,13 +1,42 @@
+
+import { useEffect, useState } from "react";
+
+
+
 const HeroSection = () => {
+  // Use public/assets/ for static images
+  const images = [
+    "/assets/imagesbg1.jpg",
+    "/assets/imagesbg2.jpg",
+    "/assets/imagesbg3.jpg",
+    "/assets/imagesbg4.jpg",
+    "/assets/imagesbg5.jpg",
+  ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 2500); // Change image every 2.5 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-[#1C1B2E] text-white px-4 text-center mt-8">
+    <section className="relative min-h-screen flex flex-col items-center justify-center bg-[#1C1B2E] text-white px-4 text-center mt-8 overflow-hidden">
+
+      {/* Background Slideshow */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src={images[currentImageIndex]}
+          alt="Background"
+          className="w-full h-full object-cover transition-opacity duration-1000 opacity-30"
+        />
+      </div>
 
       {/* Glowing circle bg : to be made better */}
       <div className="relative z-10 mb-8">
-        {/* Background Glow will be made better */}
         <div className="absolute -inset-4 blur-2xl rounded-full bg-gradient-to-tr from-purple-500 via-pink-400 to-blue-500 opacity-30 animate-pulse"></div>
-
-        {/* Foreground circle with emoji,writing emoji */}
         <div className="relative w-28 h-28 rounded-full flex items-center justify-center bg-white/5 border border-white/10 shadow-md backdrop-blur-sm">
           <span className="text-4xl">✍️</span>
         </div>
