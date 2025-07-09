@@ -59,6 +59,38 @@ Whether you're using a phone, tablet, or desktop, the experience adapts smoothly
 
 ---
 
+---
+
+## 🧩 Our Approach (Based on Human-Centered Design)
+
+Sakkhi is thoughtfully built using the principles of **Human-Centered Design (HCD)** — where every decision stems from the real, lived experiences of postpartum mothers.
+
+### 🌱 Phase-wise Development Strategy
+
+1. **Empathize – Understanding Real Needs**
+   - We explored actual case studies, journal articles, and real news stories to uncover how overlooked postpartum mental health is in India.
+   - The pain points were emotional, cultural, and deeply personal — not just medical.
+
+2. **Define – Framing the Right Problem**
+   - Instead of focusing on the baby or parenting, we framed the platform entirely around the mother’s healing journey.
+   - We aimed to remove pressure, judgment, and performance-based engagement from the experience.
+
+3. **Ideate – Designing a Safe, Gentle Space**
+   - Brainstormed features that respect emotional pacing: mood & voice check-ins, journaling, soothing rituals, optional support rooms.
+   - Prioritized calmness, softness, and privacy over engagement or “growth hacking.”
+
+4. **Prototype – Fast, Modular, Functional**
+   - Set up a scalable React + Node architecture with clear routing and separate logic layers.
+   - Created responsive, low-distraction UIs that are responsive and bandwidth-friendly.
+
+5. **Test & Iterate – Learn & Refine**
+   - Took feedback from mentors and peers at every checkpoint.
+   - Improved tab functionality, responsiveness, and flow based on real-time testing.
+
+---
+
+> “This isn't just an MVP. Sakkhi is a space that *listens* before it speaks — built slowly, carefully, and humanely.”
+
 ## 📍 Hackathon Checkpoints
 
 > ✏️ Filling in the updates after every checkpoint
@@ -152,6 +184,15 @@ Whether you're using a phone, tablet, or desktop, the experience adapts smoothly
 
 ---
 
+### ✅ Checkpoint 4 – [09-07-2025 9:07 PM]
+
+- Gave final UI and UX polish to the entire platform
+- All tabs are now built and functional (Almost)
+- Integrated remaining features as planned (Almost)
+- Verified responsiveness across devices
+- Cleaned up codebase and finalized layouts
+
+---
 
 # 🌸 Sakkhi — Local Setup Guide
 
