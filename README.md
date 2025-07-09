@@ -106,4 +106,13 @@ What Sakkhi offers:
 
 ---
 
+## 🔄 Additional Commits (Between Checkpoints)
+
+#### 📌 [09-07-2025 12:37 AM] 
+- Set up backend file structure
+- Added frontend microinteractions for smoother user experience
+- Updated README
+
+---
+
 
