@@ -128,35 +128,33 @@ sakkhi/
 ├── client/ → React frontend
 ├── server/ → Node.js backend
 
-
 ---
 
 ## 🚀 How to Run the Project Locally
 
 ### 1️⃣ Clone the Repository
 
-git clone https://github.com/Mehhhhull/sakkhi.git
-cd sakkhi
+- git clone https://github.com/Mehhhhull/sakkhi.git
+- cd sakkhi
 
 ### 2️⃣ Run the Frontend
 
-cd client
-npm install
-npm run dev
+- cd client
+- npm install
+- npm run dev
 
 ### 3️⃣ Run the Backend
 
-cd server
-npm install
-npm run dev
+- cd server
+- npm install
+- npm run dev
 
 ---
 
 # 💬 Need Help?
 Contact the developers:
 
-Mehul Kumar Singh – mehulkumarsingh6@gmail.com
-
-Tanush Gupta – tanushgupta006work@gmail.com
+- Mehul Kumar Singh – mehulkumarsingh6@gmail.com
+- Tanush Gupta – tanushgupta006work@gmail.com
 
 
