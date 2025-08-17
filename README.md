@@ -7,7 +7,21 @@ Sakkhi is **India’s first mother-first emotional wellness platform**, helping 
 ## 🌐 Live Demo
 
 You can explore the deployed version of **Sakkhi** here:  
-👉 [https://sakkhi-dun.vercel.app/](https://sakkhi-dun.vercel.app/)
+👉 [https://sakkhi-swart.vercel.app/](https://sakkhi-swart.vercel.app/)
+
+---
+
+## ✅ Post-Deadline Deployment Note [10-07-2025 12:15 AM]
+
+We completed all development work, features, final touches, and deployment *before the official deadline (09-07-2025 11:30 PM)*.
+
+However, some of the final commits were not reflecting on the deployed link due to syncing delays.
+
+We reached out to the organizer *Ayan Ahmed Khan, and with his permission, we redeployed the **same project without any code changes* to ensure the live version reflects our actual final work.
+ 
+🕒 Only the deployment was refreshed to sync with the latest commits.
+
+✅ Organizer Permission Confirmed by: *Ayan Ahmed Khan (HackOrbit Team)*
 
 ---
 
@@ -213,6 +227,16 @@ Sakkhi is thoughtfully built using the principles of **Human-Centered Design (HC
 - Verified responsiveness across devices
 - Cleaned up codebase and finalized layouts
 - Updated README
+
+---
+
+### ✅ Checkpoint Last – [09-07-2025 11:26 PM]
+- Final touches to all major sections of the website  
+- Ensured full responsiveness across devices  
+- Fixed all pending bugs and UI glitches  
+- Completed integration of all core features  
+- Cleaned up the codebase and removed unused files  
+- Added screenshots, updated README, and verified deployment
 
 ---
 
