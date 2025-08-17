@@ -7,6 +7,7 @@ const SpeakPage = () => {
   const [copied, setCopied] = useState(false);
   const [fileName, setFileName] = useState("My Recording");
   const [language, setLanguage] = useState("hi-IN");
+  const [backendResponse, setBackendResponse] = useState(null);
 
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
@@ -71,7 +72,7 @@ const SpeakPage = () => {
     setIsRecording(true);
   };
 
-  const stopRecording = () => {
+  const stopRecording = async () => {
     // Stop media recorder
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
       mediaRecorderRef.current.stop();
@@ -83,6 +84,27 @@ const SpeakPage = () => {
     }
 
     setIsRecording(false);
+
+    // 🔥 Call backend with transcript after stopping
+    if (transcript.trim()) {
+      try {
+        const res = await fetch("http://localhost:5000/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: transcript }),
+        });
+
+        const data = await res.json();
+        setBackendResponse(data);
+
+        if (data.sentiment === "negative" && data.redirect) {
+          // redirect to journal page
+          window.location.href = data.redirect;
+        }
+      } catch (err) {
+        console.error("Error calling backend:", err);
+      }
+    }
   };
 
   const handleCopy = () => {
@@ -96,7 +118,8 @@ const SpeakPage = () => {
     <div
       className="min-h-screen flex flex-col justify-center items-center text-center px-4"
       style={{
-        background: "linear-gradient(to bottom right, rgb(33,23,52), rgb(87,67,97))",
+        background:
+          "linear-gradient(to bottom right, rgb(33,23,52), rgb(87,67,97))",
       }}
     >
       <h1 className="text-white text-2xl md:text-4xl font-bold leading-snug mb-2 mt-4">
@@ -166,6 +189,19 @@ const SpeakPage = () => {
       >
         {copied ? "Copied!" : "Copy Text"}
       </button>
+
+      {/* Backend response */}
+      {backendResponse && backendResponse.sentiment === "positive" && (
+        <div className="mt-4 p-4 bg-green-500/20 border border-green-400 rounded text-white max-w-md">
+          🌟 {backendResponse.message}
+        </div>
+      )}
+
+      {backendResponse && backendResponse.sentiment === "neutral" && (
+        <div className="mt-4 p-4 bg-yellow-500/20 border border-yellow-400 rounded text-white max-w-md">
+          😌 {backendResponse.message}
+        </div>
+      )}
     </div>
   );
 };

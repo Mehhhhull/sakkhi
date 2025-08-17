@@ -10,11 +10,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "body-parser": "^2.2.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "multer": "^2.0.1",
-    "nodemon": "^3.1.10"
-  }
+    "nodemon": "^3.1.10",
+    "sentiment": "^5.0.2"
+  },
+  "description": ""
 }

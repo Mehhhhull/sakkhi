@@ -1,38 +1,58 @@
-const express = require('express');
-const cors = require('cors');
-const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
+// server.js
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import Sentiment from "sentiment";
 
 const app = express();
-const PORT = 5000;
+const port = 5000;
+const sentiment = new Sentiment();
 
 app.use(cors());
-app.use(express.json());
-app.use('/uploads', express.static('uploads'));
+app.use(bodyParser.json());
 
-// Setup Multer for audio storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const dir = 'uploads';
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-    cb(null, dir);
-  },
-  filename: function (req, file, cb) {
-    cb(null, `audio-${Date.now()}.webm`);
+// Some motivational quotes
+const quotes = [
+  "Believe you can and you're halfway there!",
+  "Every day is a new beginning.",
+  "Push yourself, because no one else is going to do it for you.",
+  "Great things never come from comfort zones.",
+  "Stay positive, work hard, make it happen!"
+];
+
+// API route
+app.post("/analyze", (req, res) => {
+  const { text } = req.body;
+
+  if (!text) {
+    return res.status(400).json({ error: "No text provided" });
+  }
+
+  // Run sentiment analysis
+  const result = sentiment.analyze(text);
+
+  if (result.score > 0) {
+    // Positive sentiment → send motivational quotes
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    return res.json({
+      sentiment: "positive",
+      message: randomQuote
+    });
+  } else if (result.score < 0) {
+    // Negative sentiment → suggest journal page redirect
+    return res.json({
+      sentiment: "negative",
+      redirect: "/journal"
+    });
+  } else {
+    // Neutral
+    return res.json({
+      sentiment: "neutral",
+      message: "Take a deep breath. You're doing great!"
+    });
   }
 });
 
-const upload = multer({ storage: storage });
-
-// Route to upload audio
-app.post('/upload', upload.single('audio'), (req, res) => {
-  if (!req.file) return res.status(400).send('No audio file uploaded.');
-
-  const fileUrl = `http://localhost:${PORT}/uploads/${req.file.filename}`;
-  res.status(200).json({ message: 'Audio uploaded successfully!', url: fileUrl });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`✅ Server running on http://localhost:${port}`);
 });
