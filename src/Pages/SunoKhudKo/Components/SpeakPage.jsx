@@ -1,209 +1,107 @@
 import React, { useState, useRef } from "react";
+import { Mic, Square } from "lucide-react";
 
-const SpeakPage = () => {
+export default function VoiceCheckIn() {
   const [isRecording, setIsRecording] = useState(false);
-  const [transcript, setTranscript] = useState("");
-  const [audioUrl, setAudioUrl] = useState(null);
-  const [copied, setCopied] = useState(false);
-  const [fileName, setFileName] = useState("My Recording");
-  const [language, setLanguage] = useState("hi-IN");
-  const [backendResponse, setBackendResponse] = useState(null);
-
+  const [showModal, setShowModal] = useState(false);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
-  const recognitionRef = useRef(null);
 
   const startRecording = async () => {
-    // Start voice recording
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    audioChunksRef.current = [];
-    const mediaRecorder = new MediaRecorder(stream);
-    mediaRecorderRef.current = mediaRecorder;
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
+      audioChunksRef.current = [];
 
-    mediaRecorder.ondataavailable = (event) => {
-      if (event.data.size > 0) {
-        audioChunksRef.current.push(event.data);
-      }
-    };
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) audioChunksRef.current.push(event.data);
+      };
 
-    mediaRecorder.onstop = () => {
-      const audioBlob = new Blob(audioChunksRef.current, { type: "audio/webm" });
-      const url = URL.createObjectURL(audioBlob);
-      setAudioUrl(url);
-    };
+      mediaRecorder.onstop = () => {
+        setShowModal(true);
+      };
 
-    mediaRecorder.start();
-
-    // Start speech recognition
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      alert("Speech Recognition not supported in your browser.");
-      return;
+      mediaRecorder.start();
+      setIsRecording(true);
+    } catch (err) {
+      console.error("Error accessing microphone", err);
     }
-
-    const recognition = new SpeechRecognition();
-    recognition.lang = language;
-    recognition.continuous = true;
-    recognition.interimResults = true;
-
-    let finalTranscript = "";
-    recognition.onresult = (event) => {
-      let interimTranscript = "";
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        const piece = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          finalTranscript += piece + " ";
-        } else {
-          interimTranscript += piece;
-        }
-      }
-      setTranscript(finalTranscript + interimTranscript);
-    };
-
-    recognition.onerror = (e) => {
-      console.error("Speech Recognition Error:", e);
-    };
-
-    recognitionRef.current = recognition;
-    recognition.start();
-
-    setIsRecording(true);
   };
 
-  const stopRecording = async () => {
-    // Stop media recorder
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
+  const stopRecording = () => {
+    if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
-    }
-
-    // Stop speech recognition
-    if (recognitionRef.current) {
-      recognitionRef.current.stop();
-    }
-
-    setIsRecording(false);
-
-    // 🔥 Call backend with transcript after stopping
-    if (transcript.trim()) {
-      try {
-        const res = await fetch("http://localhost:5000/analyze", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text: transcript }),
-        });
-
-        const data = await res.json();
-        setBackendResponse(data);
-
-        if (data.sentiment === "negative" && data.redirect) {
-          // redirect to journal page
-          window.location.href = data.redirect;
-        }
-      } catch (err) {
-        console.error("Error calling backend:", err);
-      }
+      setIsRecording(false);
     }
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(transcript).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+  const handleConfirm = () => {
+    setShowModal(false);
+
+    // Fake emotion detection for now
+    const emotions = ["happy", "sad", "neutral"];
+    const detectedEmotion = emotions[Math.floor(Math.random() * emotions.length)];
+
+    if (detectedEmotion === "happy") {
+      window.location.href = "/quotes";
+    } else if (detectedEmotion === "sad") {
+      window.location.href = "/journal";
+    } else {
+      window.location.href = "/blog";
+    }
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
   };
 
   return (
-    <div
-      className="min-h-screen flex flex-col justify-center items-center text-center px-4"
-      style={{
-        background:
-          "linear-gradient(to bottom right, rgb(33,23,52), rgb(87,67,97))",
-      }}
-    >
-      <h1 className="text-white text-2xl md:text-4xl font-bold leading-snug mb-2 mt-4">
-        Speak to Reflect <br />
-        <span className="text-pink-300">Your voice matters.</span>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-purple-100 to-pink-100">
+      <h1 className="text-2xl font-bold mb-6 text-gray-800">
+        Voice Check-in 🎤
       </h1>
 
-      <p className="text-gray-400 text-xs md:text-sm mt-4 mb-6">
-        Hold the mic button to record. Release to stop.
-      </p>
-
-      {/* Language Selector */}
-      <select
-        value={language}
-        onChange={(e) => setLanguage(e.target.value)}
-        className="mb-4 px-3 py-1 rounded bg-white/10 text-white border border-white/20"
-      >
-        <option value="hi-IN">Hindi</option>
-        <option value="en-IN">English (India)</option>
-        <option value="en-US">English (US)</option>
-        <option value="ta-IN">Tamil</option>
-        <option value="bn-IN">Bengali</option>
-        <option value="te-IN">Telugu</option>
-        <option value="mr-IN">Marathi</option>
-      </select>
-
-      {/* Mic Button */}
-      <div
-        onMouseDown={startRecording}
-        onMouseUp={stopRecording}
-        onTouchStart={startRecording}
-        onTouchEnd={stopRecording}
-        className={`w-40 h-40 rounded-full bg-gradient-to-br from-[#4c2b70] to-[#301d4c] flex items-center justify-center shadow-lg mb-6 cursor-pointer transition-all duration-300 ease-in-out ${
-          isRecording ? "animate-pulse scale-110" : "hover:scale-105"
+      {/* Recording Button */}
+      <button
+        onClick={isRecording ? stopRecording : startRecording}
+        className={`p-6 rounded-full shadow-lg transition transform hover:scale-105 focus:outline-none ${
+          isRecording ? "bg-red-500 hover:bg-red-600" : "bg-purple-500 hover:bg-purple-600"
         }`}
       >
-        <span className="text-5xl">{isRecording ? "🔴" : "🎙️"}</span>
-      </div>
-
-      {/* Rename Input */}
-      <input
-        type="text"
-        value={fileName}
-        onChange={(e) => setFileName(e.target.value)}
-        placeholder="Rename your recording"
-        className="mb-4 px-4 py-2 rounded bg-white/10 text-white border border-white/20 w-full max-w-md"
-      />
-
-      {/* Audio Player */}
-      {audioUrl && (
-        <audio controls src={audioUrl} className="mb-4 max-w-md w-full" />
-      )}
-
-      {/* Transcript */}
-      <textarea
-        value={transcript}
-        readOnly
-        rows={6}
-        className="w-full max-w-md bg-white/10 text-white border border-white/20 p-3 rounded mb-4"
-        placeholder="Your spoken words will appear here..."
-      />
-
-      {/* Copy Button */}
-      <button
-        onClick={handleCopy}
-        className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-2 rounded-full font-semibold hover:scale-105 transition"
-      >
-        {copied ? "Copied!" : "Copy Text"}
+        {isRecording ? (
+          <Square className="w-10 h-10 text-white" />
+        ) : (
+          <Mic className="w-10 h-10 text-white" />
+        )}
       </button>
 
-      {/* Backend response */}
-      {backendResponse && backendResponse.sentiment === "positive" && (
-        <div className="mt-4 p-4 bg-green-500/20 border border-green-400 rounded text-white max-w-md">
-          🌟 {backendResponse.message}
-        </div>
-      )}
+      <p className="mt-4 text-gray-600">
+        {isRecording ? "Recording... Tap to stop" : "Tap the mic to start check-in"}
+      </p>
 
-      {backendResponse && backendResponse.sentiment === "neutral" && (
-        <div className="mt-4 p-4 bg-yellow-500/20 border border-yellow-400 rounded text-white max-w-md">
-          😌 {backendResponse.message}
+      {/* Confirmation Modal */}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+          <div className="bg-white p-6 rounded-2xl shadow-xl w-80 text-center">
+            <h2 className="text-lg font-semibold mb-4">Use this recording?</h2>
+            <div className="flex justify-around">
+              <button
+                onClick={handleCancel}
+                className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirm}
+                className="px-4 py-2 rounded-lg bg-purple-500 text-white hover:bg-purple-600 transition"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
   );
-};
-
-export default SpeakPage;
+}
