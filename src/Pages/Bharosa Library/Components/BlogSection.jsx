@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '../../../lib/supabase';
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../../Context/AuthContext';
 
 const blogData = [
   {

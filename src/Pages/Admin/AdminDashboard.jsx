@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../Context/AuthContext';
 import { CheckCircle, XCircle, Eye, Trash2 } from 'lucide-react';
 
 const AdminDashboard = () => {

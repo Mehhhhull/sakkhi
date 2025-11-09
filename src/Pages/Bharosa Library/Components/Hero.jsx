@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { supabase } from "../../../lib/supabase";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../../Context/AuthContext";
 
 const Hero = () => {
   const { user } = useAuth();

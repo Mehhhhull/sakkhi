@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../../lib/supabase";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../../Context/AuthContext";
 
 // Hardcoded anonymous experience selector, here only 2 can select and this is minimum you can select
 const experiences = [
