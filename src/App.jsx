@@ -7,6 +7,8 @@ import MyReflexion from './Pages/My Reflection/MyReflection.jsx';
 import SootheSpace from './Pages/SootheSpace/SootheSpace.jsx';
 import CircleOfOne from './Pages/Circle Of Life/CircleOfLife.jsx';
 import BharosaLibrary from './Pages/Bharosa Library/BharosaLibrary.jsx';
+import AdminDashboard from './Pages/Admin/AdminDashboard.jsx';
+import ProtectedRoute from './Components/ProtectedRoute';
 
 const App = () => {
   return (
@@ -17,8 +19,30 @@ const App = () => {
         <Route path="/suno-khud-ko" element={<SunoKhudKo />} />
         <Route path="/my-reflexion" element={<MyReflexion />} />
         <Route path="/soothe-space" element={<SootheSpace />} />
-        <Route path="/circle-of-one" element={<CircleOfOne />} />
-        <Route path="/bharosa-library" element={<BharosaLibrary />} />
+        <Route 
+          path="/circle-of-one" 
+          element={
+            <ProtectedRoute message="Sign in to join Circle of One and share with the community">
+              <CircleOfOne />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/bharosa-library" 
+          element={
+            <ProtectedRoute message="Sign in to access Bharosa Library and contribute">
+              <BharosaLibrary />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/admin" 
+          element={
+            <ProtectedRoute message="Sign in to access Admin Dashboard">
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
     </div>
   );

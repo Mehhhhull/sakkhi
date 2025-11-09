@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { supabase } from "../../../lib/supabase";
+import { useAuth } from "../../../context/AuthContext";
 
 const Hero = () => {
+  const { user } = useAuth();
   const [showForm, setShowForm] = useState(false);
 
   return (
@@ -40,21 +43,25 @@ const Hero = () => {
         </button>
       </div>
 
-      {showForm && <StoryForm onClose={() => setShowForm(false)} />}
+      {showForm && <StoryForm onClose={() => setShowForm(false)} user={user} />}
     </div>
   );
 };
 
 // new story form content
 
-const StoryForm = ({ onClose }) => {
+const StoryForm = ({ onClose, user }) => {
   const [formData, setFormData] = useState({
     title: "",
     location: "",
     name: "",
     story: "",
+    category: "",
+    emoji: "✨",
+    language: "English",
     accepted: false,
   });
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -64,7 +71,12 @@ const StoryForm = ({ onClose }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const generateSnippet = (text) => {
+    const words = text.split(' ').slice(0, 15).join(' ');
+    return words + (text.split(' ').length > 15 ? '...' : '');
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.accepted) {
@@ -72,8 +84,42 @@ const StoryForm = ({ onClose }) => {
       return;
     }
 
-    alert("Your story has been sent for verification. It will be posted once approved.");
-    onClose(); // Close the modal hereeee
+    if (!user) {
+      alert("Please sign in to submit a story.");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const { data, error } = await supabase
+        .from('bharosa_stories')
+        .insert([
+          {
+            user_id: user.id,
+            title: formData.title,
+            city: formData.location,
+            author_name: formData.name,
+            content: formData.story,
+            snippet: generateSnippet(formData.story),
+            category: formData.category || 'Personal Story',
+            emoji: formData.emoji,
+            language: formData.language,
+            is_approved: false,
+            is_published: false,
+          },
+        ]);
+
+      if (error) throw error;
+
+      alert("Your story has been sent for verification. It will be posted once approved. Thank you for sharing! 💜");
+      onClose();
+    } catch (error) {
+      console.error('Error submitting story:', error);
+      alert("There was an error submitting your story. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -127,6 +173,50 @@ const StoryForm = ({ onClose }) => {
           </div>
 
           <div>
+            <label className="text-sm block mb-1">Category (optional)</label>
+            <input
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              placeholder="e.g., Postpartum Depression, Self-Discovery"
+              className="w-full bg-purple-800 text-white p-2 rounded"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm block mb-1">Emoji</label>
+              <select
+                name="emoji"
+                value={formData.emoji}
+                onChange={handleChange}
+                className="w-full bg-purple-800 text-white p-2 rounded"
+              >
+                <option value="✨">✨ Sparkles</option>
+                <option value="🦋">🦋 Butterfly</option>
+                <option value="🌸">🌸 Blossom</option>
+                <option value="💜">💜 Purple Heart</option>
+                <option value="🌙">🌙 Moon</option>
+                <option value="🌟">🌟 Star</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="text-sm block mb-1">Language</label>
+              <select
+                name="language"
+                value={formData.language}
+                onChange={handleChange}
+                className="w-full bg-purple-800 text-white p-2 rounded"
+              >
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Hinglish">Hinglish</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
             <label className="text-sm block mb-1">Your story *</label>
             <textarea
               name="story"
@@ -164,9 +254,10 @@ const StoryForm = ({ onClose }) => {
             </button>
             <button
               type="submit"
-              className="px-6 py-2 bg-pink-400 hover:bg-pink-500 text-white rounded font-semibold"
+              disabled={submitting}
+              className="px-6 py-2 bg-pink-400 hover:bg-pink-500 text-white rounded font-semibold disabled:opacity-50"
             >
-              Submit Story
+              {submitting ? 'Submitting...' : 'Submit Story'}
             </button>
           </div>
         </form>

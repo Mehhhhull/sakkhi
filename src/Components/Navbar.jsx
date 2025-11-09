@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiMenu, FiX } from 'react-icons/fi'
+import { useAuth } from '../context/AuthContext'
+import UserMenu from './Auth/UserMenu'
+import Login from './Auth/Login'
+import Signup from './Auth/Signup'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
+  const [showSignup, setShowSignup] = useState(false)
+  const { user } = useAuth()
 
   return (
     <nav className="bg-[#1C1B2E] w-full h-[72px] shadow-lg flex items-center justify-between px-4 md:px-12 fixed top-0 left-0 z-50">
@@ -44,6 +51,25 @@ const Navbar = () => {
         >
           Bharosa Library
         </Link>
+        
+        {user ? (
+          <UserMenu />
+        ) : (
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowLogin(true)}
+              className="py-1 px-4 text-lg font-light text-white hover:text-black rounded-2xl hover:bg-pink-200 transition duration-300"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => setShowSignup(true)}
+              className="py-1 px-4 text-lg font-light bg-pink-200 text-black rounded-2xl hover:bg-pink-300 transition duration-300"
+            >
+              Sign Up
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Mobile specific navbar */}
@@ -91,7 +117,54 @@ const Navbar = () => {
           >
             Bharosa Library
           </Link>
+          
+          {user ? (
+            <div className="w-full pt-2 border-t border-gray-600">
+              <UserMenu />
+            </div>
+          ) : (
+            <div className="flex gap-2 w-full pt-2 border-t border-gray-600">
+              <button
+                onClick={() => {
+                  setShowLogin(true);
+                  setIsOpen(false);
+                }}
+                className="flex-1 py-2 px-4 text-white hover:text-black rounded-lg hover:bg-pink-200 transition"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => {
+                  setShowSignup(true);
+                  setIsOpen(false);
+                }}
+                className="flex-1 py-2 px-4 bg-pink-200 text-black rounded-lg hover:bg-pink-300 transition"
+              >
+                Sign Up
+              </button>
+            </div>
+          )}
         </div>
+      )}
+
+      {showLogin && (
+        <Login
+          onClose={() => setShowLogin(false)}
+          onSwitchToSignup={() => {
+            setShowLogin(false);
+            setShowSignup(true);
+          }}
+        />
+      )}
+
+      {showSignup && (
+        <Signup
+          onClose={() => setShowSignup(false)}
+          onSwitchToLogin={() => {
+            setShowSignup(false);
+            setShowLogin(true);
+          }}
+        />
       )}
     </nav>
   )

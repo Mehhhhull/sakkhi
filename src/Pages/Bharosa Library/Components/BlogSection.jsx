@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { supabase } from '../../../lib/supabase';
+import { useAuth } from '../../../context/AuthContext';
 
 const blogData = [
   {
@@ -64,7 +66,93 @@ Abhi bhi sometimes overthink karti hoon, but ab samajh gaya hai - perfect maa ko
 
 // ===== Main Component Function =====
 function BlogSection() {
+  const { user } = useAuth();
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const [realStories, setRealStories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [bookmarkedStories, setBookmarkedStories] = useState(new Set());
+
+  useEffect(() => {
+    loadStories();
+    if (user) {
+      loadBookmarks();
+    }
+  }, [user]);
+
+  const loadStories = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('bharosa_stories')
+        .select('*')
+        .eq('is_published', true)
+        .order('published_at', { ascending: false });
+
+      if (error) {
+        console.error('Error loading stories:', error);
+      }
+
+      if (data) {
+        console.log('Loaded real stories:', data.length);
+        setRealStories(data);
+      }
+    } catch (error) {
+      console.error('Error loading stories:', error);
+    }
+    setLoading(false);
+  };
+
+  const loadBookmarks = async () => {
+    if (!user) return;
+
+    try {
+      const { data } = await supabase
+        .from('story_bookmarks')
+        .select('story_id')
+        .eq('user_id', user.id);
+
+      if (data) {
+        setBookmarkedStories(new Set(data.map(b => b.story_id)));
+      }
+    } catch (error) {
+      console.error('Error loading bookmarks:', error);
+    }
+  };
+
+  const toggleBookmark = async (storyId) => {
+    if (!user) {
+      alert('Please sign in to bookmark stories');
+      return;
+    }
+
+    try {
+      if (bookmarkedStories.has(storyId)) {
+        // Remove bookmark
+        await supabase
+          .from('story_bookmarks')
+          .delete()
+          .eq('user_id', user.id)
+          .eq('story_id', storyId);
+
+        setBookmarkedStories(prev => {
+          const newSet = new Set(prev);
+          newSet.delete(storyId);
+          return newSet;
+        });
+      } else {
+        // Add bookmark
+        await supabase
+          .from('story_bookmarks')
+          .insert([{ user_id: user.id, story_id: storyId }]);
+
+        setBookmarkedStories(prev => new Set([...prev, storyId]));
+      }
+    } catch (error) {
+      console.error('Error toggling bookmark:', error);
+    }
+  };
+
+  // Combine dummy data with real stories
+  const allStories = [...blogData, ...realStories];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#2a0845] to-[#6441a5] text-white px-6 py-12 font-sans">
@@ -76,8 +164,12 @@ function BlogSection() {
         <p className="text-pink-100">Each story is a whisper that became a roar, a silence that found its voice</p>
       </div>
       {/* Yaha pe motion and animation ka use horaha hai, framer motion download karna padega */}
+      {loading && (
+        <div className="text-center text-pink-200 mb-6">Loading stories...</div>
+      )}
+
       <div className="grid md:grid-cols-3 gap-6">
-        {blogData.map(blog => (
+        {allStories.map(blog => (
           <motion.div
             key={blog.id}
             whileHover={{ scale: 1.03 }}
@@ -145,9 +237,14 @@ function BlogSection() {
               Thank you for sharing your truth with us 💜
             </p>
             <div className="mt-2 text-xs flex justify-between text-pink-300">
-              <span>Submitted on {selectedBlog.submittedDate}</span>
+              <span>Submitted on {selectedBlog.submittedDate || new Date(selectedBlog.created_at).toLocaleDateString()}</span>
               <span className="space-x-4">
-                <button className="hover:underline">🔖 Bookmark</button>
+                <button 
+                  onClick={() => toggleBookmark(selectedBlog.id)}
+                  className="hover:underline"
+                >
+                  {bookmarkedStories.has(selectedBlog.id) ? '🔖 Bookmarked' : '🔖 Bookmark'}
+                </button>
                 <button className="hover:underline">🪞 Reflect</button>
               </span>
             </div>
